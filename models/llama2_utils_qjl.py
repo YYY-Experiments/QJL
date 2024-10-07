@@ -97,9 +97,12 @@ class QJLKeyQuantizer:
         self.seq_len = None
         self.outlier_indices = None
         self.key_states_outliers = None
-        self.key_states_quant_binary = None
+        # self.key_states_quant_binary = None
+        self.key_states_quant = None
         self.key_states_norm = None
         self.key_residual = None
+        self.key_outliers_quant = None
+        self.key_outliers_norm = None
         self.bit_pack_len = 8
 
     def build_sketch(self, key_states: torch.Tensor) -> None:
@@ -109,8 +112,8 @@ class QJLKeyQuantizer:
 
         if residual_size > 0:
             self.key_residual = key_states[:, :, self.seq_len-residual_size:, :]
-        if residual_size == self.seq_len:
-            return None
+        # if residual_size == self.seq_len:
+        #     return None
 
         num_groups = (self.seq_len - residual_size) // self.group_size
         key_states = key_states[:, :, :self.seq_len-residual_size, :].reshape((b, h, num_groups, self.group_size, dim)).contiguous()

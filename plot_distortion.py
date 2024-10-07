@@ -77,7 +77,7 @@ def main(args):
               edgecolor='k', labelspacing=0.2, borderaxespad=0.5, borderpad=0.3)
 
     fig.tight_layout(pad=2)
-    plt.savefig('error_vs_num_bits.pdf')
+    plt.savefig('figures/error_vs_num_bits.pdf')
     plt.show()
 
 

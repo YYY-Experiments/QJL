@@ -78,9 +78,9 @@ def run_test(results):
 
 
 def plot_results(tname, filename):
-    rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
-    rc('text', usetex=True)
-    plt.rc('text', usetex=True)
+    # rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    # rc('text', usetex=True)
+    # plt.rc('text', usetex=True)
     rc('font', family='sans-serif', size=20)
 
     method_names = {'model_exact': 'BF16', 'model_kivi': 'KIVI', 'model_qjl': 'QJL (ours)', 'model_kvquant': 'KVQuant'}
@@ -127,16 +127,17 @@ def plot_results(tname, filename):
 
     fig.tight_layout(pad=2)
     plt.savefig(filename)
-    plt.show()
+    # plt.show()
 
 
 if __name__ == "__main__":
-    model_name = "meta-llama/Meta-Llama-3-8B"
+    # model_name = "meta-llama/Meta-Llama-3-8B"
+    model_name = "lmsys/longchat-7b-v1.5-32k"
     dtype = torch.bfloat16
     device = 'cuda'
     tokenizer = AutoTokenizer.from_pretrained(model_name,
                                               use_fast=False,
-                                              trust_remote_code=True, )
+                                              trust_remote_code=True)
 
     config = LlamaConfig.from_pretrained(model_name)
     config._flash_attn_2_enabled = True
@@ -188,4 +189,4 @@ if __name__ == "__main__":
     for model in results.values():
         model['tim_total'] = [enc + gen for enc, gen in zip(model['tim_enc'], model['tim_gen'])]
 
-    plot_results('tim_total', 'fig_quant_total_time_llama3.png')
+    plot_results('tim_total', 'figures/fig_quant_total_time_llama3.png')

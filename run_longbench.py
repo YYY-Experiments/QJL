@@ -192,7 +192,7 @@ def evaluate_model(
 
 def main(args):
     seed_everything(args.seed)
-    dataset2maxlen, dataset2prompt, model2maxlen,  = load_configurations(args.config_dir)
+    dataset2maxlen, dataset2prompt, model2maxlen,  = load_configurations("config")
     dtype = torch.float16 if args.dtype == "float16" else torch.float32
     model_qjl, tokenizer = setup_model_and_tokenizer(
         args.model_name,

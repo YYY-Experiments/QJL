@@ -65,9 +65,9 @@ def run_test(results):
 
 
 def plot_results(tname, filename):
-    rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
-    rc('text', usetex=True)
-    plt.rc('text', usetex=True)
+    # rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    # rc('text', usetex=True)
+    # plt.rc('text', usetex=True)
     rc('font', family='sans-serif', size=20)
 
     method_names = {'model_exact': 'FP16', 'model_kivi_3': 'KIVI 3-bits', 'model_qjl_3': 'QJL 3-bits',
@@ -108,7 +108,8 @@ def plot_results(tname, filename):
 
 
 if __name__ == "__main__":
-    model_name = "meta-llama/Meta-Llama-3-8B"
+    # model_name = "meta-llama/Meta-Llama-3-8B"
+    model_name = "lmsys/longchat-7b-v1.5-32k"
     dtype = torch.bfloat16
     device = 'cuda'
     tokenizer = AutoTokenizer.from_pretrained(model_name,
@@ -159,4 +160,4 @@ if __name__ == "__main__":
     rep = 10
 
     run_test(results)
-    plot_results('tim_total', 'fig_quant_memory_peak_llama3.png')
+    plot_results('tim_total', 'figures/fig_quant_memory_peak_llama3.png')
